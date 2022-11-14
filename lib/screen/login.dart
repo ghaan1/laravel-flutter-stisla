@@ -57,6 +57,7 @@ class _Login extends State<Login> {
   final deviceId = "12345";
   final response = await HttpHelper().login(email, password, deviceId);
   print(response.body);
+  Navigator.pushNamed(context, "/after");
 }
 }
 

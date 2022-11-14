@@ -16,10 +16,29 @@ class _AfterLoginState extends State<AfterLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-       child: Text('Masuk'),
+       child: 
+       Column(
+        children : [ 
+        Text('Masuk'),
+        ElevatedButton(
+          onPressed: (){
+Navigator.pushNamed(context, "/");
+          },
+        child: Text('LOGOUT')),
+        ],
+        ),
+
       )
     );
   }
+//   Future doLogin() async{
+//   final email = txtEmail.text;
+//   final password = txtPassword.text;
+//   final deviceId = "12345";
+//   final response = await HttpHelper().login(email, password, deviceId);
+//   print(response.body);
+//   Navigator.pushNamed(context, "/after");
+// }
 
 }
 
