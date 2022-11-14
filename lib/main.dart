@@ -1,6 +1,7 @@
 import 'package:stislaflutter/screen/landingPage.dart';
 import 'package:stislaflutter/screen/login.dart';
 import 'package:stislaflutter/screen/AfterLogin.dart';
+import 'package:stislaflutter/screen/register.dart';
 
 import 'api/http_helper.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         "/":(context) => LandingPage(),
           "/login":(context) => Login(),
           "/after":(context) => AfterLogin(),
+          "/register":(context) => Register(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(

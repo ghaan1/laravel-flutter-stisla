@@ -26,7 +26,7 @@ String token = '0';
     getPref();
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,7 @@ String token = '0';
                 Navigator.pushNamed(context, "/login");
             }, child: Text('Login')),
              ElevatedButton(onPressed: (){
-
+Navigator.pushNamed(context, "/register");
             }, child: Text('Register'))
           ],
           

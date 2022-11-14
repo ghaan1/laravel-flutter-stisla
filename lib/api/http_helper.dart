@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HttpHelper{
-  final String _baseUrl = 'http://192.168.1.5:8000/api/auth/';
+  final String _baseUrl = 'http://172.168.22.6:8000/api/auth/';
   final String token ='';
 
 
@@ -23,6 +23,23 @@ Future<Response> login(String email, String password, String deviceId) async {
   final response = await post(url, body: body, headers: headers);
   var data = json.decode(response.body);
    _save(data['token']);
+  return response;
+}
+
+Future<Response> register(String name, String email, String password, String deviceId) async {
+  final url = Uri.parse(_baseUrl + 'register');
+  final body = {
+    'name' : name,
+    'email' : email,
+    'password' : password,
+    'password_confirmation' : password,
+    'device_name' : deviceId
+  };
+  final headers = {
+    'Accept': 'application/json',
+  };
+
+  final response = await post(url, body: body, headers: headers);
   return response;
 }
 
