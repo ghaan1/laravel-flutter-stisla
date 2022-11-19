@@ -58,6 +58,7 @@ class _Register extends State<Register> {
               },
               child: Text("Register")),
           ),
+          
         ],
        ), 
       )

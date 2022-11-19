@@ -15,13 +15,17 @@ class _AfterLoginState extends State<AfterLogin> {
   
 
   String token = '';
+  String name = '';
   getPref() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
    
       setState(() {
          const key = 'token';
+         const key1 = 'name';
          final value = pref.get(key);
+         final value1 = pref.get(key1);
          token = '$value';
+         name = '$value1';
       });
     
   }
@@ -58,6 +62,7 @@ class _AfterLoginState extends State<AfterLogin> {
         children : [ 
           
           Text(token),
+          Text(name),
         Text('Masuk'),
         ElevatedButton(
           onPressed: (){

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../api/http_helper.dart';
@@ -8,6 +6,8 @@ import '../api/http_helper.dart';
 
 
 class Login extends StatefulWidget {
+  const Login({super.key});
+
    @override
   State<Login> createState() => _Login();
 }
@@ -23,22 +23,17 @@ class _Login extends State<Login> {
       body: Container(
         margin: EdgeInsets.all(5),
         child: Column(
-        
         children: [
-          Container(
-            child: TextFormField(
-              controller: txtEmail,
-              decoration: InputDecoration(
-                hintText: 'Email'
-              ),
+          TextFormField(
+            controller: txtEmail,
+            decoration: const InputDecoration(
+              hintText: 'Email'
             ),
           ),
-          Container(
-            child: TextFormField(
-              controller: txtPassword,
-              decoration: InputDecoration(
-                hintText: 'Password'
-              ),
+          TextFormField(
+            controller: txtPassword,
+            decoration: const InputDecoration(
+              hintText: 'Password'
             ),
           ),
           SizedBox(
@@ -57,9 +52,10 @@ class _Login extends State<Login> {
   Future doLogin() async{
   final email = txtEmail.text;
   final password = txtPassword.text;
-  final deviceId = "12345";
+  const deviceId = "12345";
   final response = await HttpHelper().login(email, password, deviceId);
   print(response.body);
+
   Navigator.pushNamed(context, "/after");
 }
 
