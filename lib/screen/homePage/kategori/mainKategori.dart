@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:network/network.dart';
@@ -44,50 +45,87 @@ String name ='';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
      appBar: AppBar(
         title: const Center(
-          child: Text('Kategori',
+          child: Text('KATEGORI',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontWeight: FontWeight.bold,
           ),
           ),
         ),
+        
+        
         backgroundColor: Color(0xFF6777EE),
         automaticallyImplyLeading: false,
+        
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF6777EE),
+        onPressed: (){
+          
+        },
+        child: Icon(Icons.add,
+        size: 40,
+        color: Colors.black,
+        ),
       ),
       body: <Widget>[
         ListView.builder(
           itemCount: listCategory.length,
           itemBuilder:  (context, index){
             var kategori = listCategory[index];
-            return Container(
-              child: Text(kategori.name)
+            return Dismissible(
+              key: UniqueKey(),
+              background: Container(
+                color: Colors.yellow,
+                child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Row(
+                        children: const <Widget>[
+                          Icon(Icons.create_rounded, color: Colors.white),
+                          Text('Edit', style: TextStyle(color: Colors.black,
+                          fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  secondaryBackground: Container(
+                  color: Colors.red,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: const <Widget>[
+                        Icon(Icons.delete, color: Colors.white),
+                        Text('Hapus', style: TextStyle(color: Colors.black,
+                        fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
+                ),
+             child: Container(
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color(0xFF6777EE),
+                  width: 1,
+                )
+              ),
+               child: ListTile(
+                        title:Text(kategori.name,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.bold
+                        ),
+                        textAlign: TextAlign.center,
+                        )
+               ),
+             ),
             );
-          
-          })
-      //  FutureBuilder<Category>(
-      //  future: futureCategory,
-      //  builder: (context, snapshot) {
-         
-         // if (snapshot.hasData) {
-          // return Text(snapshot.data!.name);
-         // } else if (snapshot.hasError) {
-         //   return Text('${snapshot.error}');
-         // }
-       //print(snapshot);
-         // By default, show a loading spinner.
-         //return const CircularProgressIndicator();
-      //  },
-      //  ),
-       
-        // ElevatedButton(
-        //   onPressed: (){
-        //   kategori();
-        //   },
-        // child: Text('ambil data')),
-
-      ][currentPageIndex],
+          }),
+        ][currentPageIndex],
     );
    
   }

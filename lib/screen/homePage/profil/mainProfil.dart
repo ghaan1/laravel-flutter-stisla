@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:network/network.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stislaflutter/screen/homePage/home/mainHome.dart';
-
 import '../../../api/http_helper.dart';
 
 
@@ -63,9 +62,10 @@ class _MainProfilState extends State<MainProfil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
     appBar: AppBar(
         title: const Center(
-          child: Text('Profil',
+          child: Text('PROFIL',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontWeight: FontWeight.bold,
@@ -77,6 +77,8 @@ class _MainProfilState extends State<MainProfil> {
       ),
       body: <Widget>[
         Container(
+          //padding: EdgeInsets.all(20),
+          margin: EdgeInsets.all(20),
           width: double.infinity,
           child: Column(
             children: [
@@ -98,6 +100,7 @@ class _MainProfilState extends State<MainProfil> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextFormField(
+                       readOnly: true,
               controller: txtName,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 10,horizontal: 17),
@@ -123,8 +126,12 @@ class _MainProfilState extends State<MainProfil> {
                     borderRadius: BorderRadius.circular(15),
                 ),
               ),
+          ),
+          SizedBox(
+            height: 20,
           ),     
                    TextFormField(
+                    readOnly: true,
               controller: txtEmail,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 10,horizontal: 17),
@@ -151,7 +158,11 @@ class _MainProfilState extends State<MainProfil> {
                 ),
               ),
           ),     
-                   TextFormField(
+          SizedBox(
+            height: 20,
+          ), 
+                   TextFormField( 
+                    readOnly: true,
               controller: txtToken,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 10,horizontal: 17),
@@ -177,13 +188,26 @@ class _MainProfilState extends State<MainProfil> {
                     borderRadius: BorderRadius.circular(15),
                 ),
               ),
-          ),     
+          ),    
+          SizedBox(
+            height: 36,
+          ),  
                  ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF6777EE),
+                elevation: 10,
+                shape: RoundedRectangleBorder( //to set border radius to button
+                borderRadius: BorderRadius.circular(13)
+            ),
+              ),
           onPressed: (){
 Navigator.pushNamed(context, "/");
 logOut();
           },
-        child: Text('LOGOUT')),
+        child: Text('LOGOUT',
+        style: TextStyle(
+          fontWeight: FontWeight.bold
+        ),)),
 
                   ],
                 ),
