@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:stislaflutter/screen/landingPage.dart';
 import '../login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 1), () {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => const Login()));
+          .pushReplacement(MaterialPageRoute(builder: (_) =>LandingPage()));
     });
   }
 

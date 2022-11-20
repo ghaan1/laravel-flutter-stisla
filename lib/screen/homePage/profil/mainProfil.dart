@@ -37,6 +37,7 @@ class _MainProfilState extends State<MainProfil> {
          txtEmail.text=email;
       });
   }
+
    logOut() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(()  {
@@ -44,8 +45,9 @@ class _MainProfilState extends State<MainProfil> {
       preferences.clear();   
        
     });
-     final response = await HttpHelper().logout(token);
-      print(response.body);
+    final token = txtToken.text;
+    final response = await HttpHelper().logout(token);
+    print(response.body);
   }
 
   final txtName = TextEditingController();

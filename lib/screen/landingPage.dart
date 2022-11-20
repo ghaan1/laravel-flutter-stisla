@@ -31,7 +31,9 @@ String token = '0';
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        
+        decoration: BoxDecoration(
+          color: Color(0xFF6777EE),
+        ),
         width: double.infinity,
         child: Column(
           
@@ -40,10 +42,24 @@ String token = '0';
           children: [
             Text(token),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: const Color(0xFFc2c9f8),
+                elevation: 10,
+                shape: RoundedRectangleBorder( //to set border radius to button
+                borderRadius: BorderRadius.circular(15)
+            ),
+              ),
               onPressed: (){
                 Navigator.pushNamed(context, "/login");
             }, child: Text('Login')),
-             ElevatedButton(onPressed: (){
+             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF343c77),
+                elevation: 10,
+                shape: RoundedRectangleBorder( //to set border radius to button
+                borderRadius: BorderRadius.circular(15)
+            ),
+              ),onPressed: (){
 Navigator.pushNamed(context, "/register");
             }, child: Text('Register'))
           ],

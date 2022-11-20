@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stislaflutter/screen/homePage/LandingHome.dart';
+import 'package:stislaflutter/screen/homePage/home/mainHome.dart';
 import '../api/http_helper.dart';
 
 class Login extends StatefulWidget {
@@ -132,14 +136,46 @@ class _Login extends State<Login> {
   final response = await HttpHelper().login(email, password, deviceId);
   print(response.body);
 
-  Navigator.pushNamed(context, "/main");
-}
+  SharedPreferences pref = await SharedPreferences.getInstance();
+        const key = 'token';
+        final value = pref.get(key);
+        final token = value;
+  print(token);
 
-read() async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.get(key ) ?? 0;
-    }
-  }
+      final tokenTest = null;
+    if (token == null) {
+    Navigator.push(
+                  context,
+                MaterialPageRoute(builder: (context) => Login()),
+              );
+    }else{
+    Navigator.push(
+                  context,
+                MaterialPageRoute(builder: (context) => LandingHome()),
+              );
+ }
+  //     Duration(seconds: 3),
+  //     () async {
+  //       SharedPreferences pref = await SharedPreferences.getInstance();
+  //       const key = 'token';
+  //       final value = pref.get(key);
+  //       final token = '$value';
+  //       if (token == null) {
+         
+        
+  //         Navigator.push(
+  //            context,
+  //            MaterialPageRoute(builder: (context) => Login()),
+  //         );
+  //       }
+  //        Navigator.push(
+  //            context,
+  //            MaterialPageRoute(builder: (context) => LandingHome()),
+  //         );
+  //     },
+  //   );
+  //Navigator.pushNamed(context, "/main");
+}
+}
 
 
