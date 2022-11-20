@@ -11,10 +11,10 @@ class Login extends StatefulWidget {
 
 class _Login extends State<Login> {
 
-  final txtEmail = TextEditingController();
-  final txtPassword = TextEditingController();
-  // final txtEmail = TextEditingController(text : 'superadmin@gmail.com');
-  // final txtPassword = TextEditingController(text : 'password');
+  //final txtEmail = TextEditingController();
+  //final txtPassword = TextEditingController();
+  final txtEmail = TextEditingController(text : 'superadmin@gmail.com');
+  final txtPassword = TextEditingController(text : 'password');
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class _Login extends State<Login> {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF6777EE),
+                primary: const Color(0xFF6777EE),
                 elevation: 10,
                 shape: RoundedRectangleBorder( //to set border radius to button
                 borderRadius: BorderRadius.circular(15)
@@ -132,7 +132,7 @@ class _Login extends State<Login> {
   final response = await HttpHelper().login(email, password, deviceId);
   print(response.body);
 
-  Navigator.pushNamed(context, "/after");
+  Navigator.pushNamed(context, "/main");
 }
 
 read() async {

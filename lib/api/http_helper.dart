@@ -24,6 +24,7 @@ Future<Response> login(String email, String password, String deviceId) async {
   var data = json.decode(response.body);
    _save('token',data['token']);
    _save('name',data['name']);
+   _save('email',data['email']);
  
   return response;
 }
@@ -46,7 +47,7 @@ Future<Response> register(String name, String email, String password, String dev
 }
 
 Future<Response> logout(String token) async {
-  final url = Uri.parse(_baseUrl + 'login');
+  final url = Uri.parse(_baseUrl + 'logout');
   final body = {
     'token' : token,
   };
@@ -57,6 +58,8 @@ Future<Response> logout(String token) async {
    
   return response;
 }
+
+
 
  _save(String key, String data) async {
     final prefs = await SharedPreferences.getInstance();

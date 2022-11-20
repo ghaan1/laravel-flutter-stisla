@@ -1,5 +1,8 @@
+import 'package:stislaflutter/screen/homePage/LandingHome.dart';
+import 'package:stislaflutter/screen/homePage/home/mainHome.dart';
+import 'package:stislaflutter/screen/homePage/kategori/mainKategori.dart';
+import 'package:stislaflutter/screen/homePage/profil/mainProfil.dart';
 import 'package:stislaflutter/screen/login.dart';
-import 'package:stislaflutter/screen/AfterLogin.dart';
 import 'package:stislaflutter/screen/register.dart';
 import 'package:stislaflutter/screen/splash/screen.dart';
 
@@ -19,9 +22,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(  
       routes: {
         "/":(context) => const SplashScreen(),
-          "/login":(context) => Login(),
-          "/after":(context) => AfterLogin(),
+          "/login":(context) => const Login(),
           "/register":(context) => Register(),
+          "/main":(context) => const LandingHome(),
+          "/mainhome":(context) => const MainHome(),
+          "/mainprofil":(context) => const MainProfil(),
+          "/mainkategori":(context) => const MainKategori(),
+
       },
       title: 'Flutter Demo',
       theme: ThemeData(
