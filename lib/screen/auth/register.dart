@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/http_helper.dart';
 
 
@@ -8,13 +6,20 @@ import '../../api/http_helper.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
-
    @override
   State<Register> createState() => _Register();
 }
 
 class _Register extends State<Register> {
-
+  doRegister() async{
+    final name = txtName.text;
+    final email = txtEmail.text;
+    final password = txtPassword.text;
+    const deviceId = "12345";
+    final response = await HttpHelper().register(name, email, password, deviceId);
+    print(response.body);
+    Navigator.pushNamed(context, "/");
+  }
   final TextEditingController txtName = TextEditingController(text: 'test');
   final TextEditingController txtEmail = TextEditingController(text: 'test@mail.com');
   final TextEditingController txtPassword = TextEditingController(text: 'password');
@@ -26,18 +31,18 @@ class _Register extends State<Register> {
       body: Container(
         color: const Color(0xFFF3F6F9),
         padding: const EdgeInsets.all(30),
-        margin: EdgeInsets.all(5),
+        margin: const EdgeInsets.all(5),
         child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
               'Register',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 24,
                   color: Color(0xFF6777EE)
                 ),
-              ),
+            ),
           const SizedBox(
             height: 10,
           ),
@@ -53,21 +58,21 @@ class _Register extends State<Register> {
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Nunito'
               ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    width: 3, 
-                    color: Color(0xFF6777EE)
-                  ),
-                  borderRadius: BorderRadius.circular(15),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  width: 3, 
+                  color: Color(0xFF6777EE)
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    width: 3, 
-                    color: Color(0xFF6777EE)),
-                  borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  width: 3, 
+                  color: Color(0xFF6777EE)
+                ),
+                borderRadius: BorderRadius.circular(15),
               ),
             ),
-            
           ),
           const SizedBox(
             height: 10,
@@ -114,18 +119,18 @@ class _Register extends State<Register> {
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Nunito'
               ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    width: 3, 
-                    color: Color(0xFF6777EE)
-                  ),
-                  borderRadius: BorderRadius.circular(15),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  width: 3, 
+                  color: Color(0xFF6777EE)
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    width: 3, 
-                    color: Color(0xFF6777EE)),
-                  borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  width: 3, 
+                  color: Color(0xFF6777EE)),
+                borderRadius: BorderRadius.circular(15),
               ),
             ),
           ),
@@ -137,37 +142,28 @@ class _Register extends State<Register> {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF6777EE),
+                backgroundColor: const Color(0xFF6777EE),
                 elevation: 10,
                 shape: RoundedRectangleBorder( //to set border radius to button
-                borderRadius: BorderRadius.circular(15)
-            ),
+                  borderRadius: BorderRadius.circular(15)
+                ),
               ),
-              
               onPressed: () {
                 doRegister();
               },
               child: const Text("Register",
-              style: TextStyle(
+                style: TextStyle(
                   fontFamily: 'Nunito',
                   fontWeight: FontWeight.bold
-                ))),
+                )
+              )
+            ),
           ),
-          
         ],
        ), 
       )
     );
   }
-  Future doRegister() async{
-  final name = txtName.text;
-  final email = txtEmail.text;
-  final password = txtPassword.text;
-  final deviceId = "12345";
-  final response = await HttpHelper().register(name, email, password, deviceId);
-  print(response.body);
-  Navigator.pushNamed(context, "/");
-}
 }
 
 

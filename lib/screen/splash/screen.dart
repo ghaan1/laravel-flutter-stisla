@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stislaflutter/screen/landingPage.dart';
-import '../auth/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -46,10 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     Text(
                       "~STISLA FLUTTER~",
                       style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 24.0,
-                          fontFamily: 'Nunito',
-                          color: Color(0xFF6777EE)),
+                        fontWeight: FontWeight.w900,
+                        fontSize: 24.0,
+                        fontFamily: 'Nunito',
+                        color: Color(0xFF6777EE)),
                     )
                   ],
                 ),

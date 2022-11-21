@@ -2,12 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stislaflutter/screen/homePage/LandingHome.dart';
-import 'package:stislaflutter/screen/homePage/home/mainHome.dart';
 import '../../api/http_helper.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
-
    @override
   State<Login> createState() => _Login();
 }
@@ -18,6 +16,30 @@ class _Login extends State<Login> {
   //final txtPassword = TextEditingController();
   final txtEmail = TextEditingController(text : 'superadmin@gmail.com');
   final txtPassword = TextEditingController(text : 'password');
+
+  Future doLogin() async{
+    final email = txtEmail.text;
+    final password = txtPassword.text;
+    const deviceId = "12345";
+    final response = await HttpHelper().login(email, password, deviceId);
+    print(response.body);
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+      const key = 'token';
+      final value = pref.get(key);
+      final token = value;
+      if (token == null) {
+      Navigator.push(
+          context,
+        MaterialPageRoute(builder: (context) => Login()),
+      );
+      }else{
+      Navigator.push(
+          context,
+        MaterialPageRoute(builder: (context) => LandingHome()),
+      );
+      }
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +129,7 @@ class _Login extends State<Login> {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF6777EE),
+                backgroundColor: const Color(0xFF6777EE),
                 elevation: 10,
                 shape: RoundedRectangleBorder( //to set border radius to button
                 borderRadius: BorderRadius.circular(15)
@@ -128,32 +150,6 @@ class _Login extends State<Login> {
       )
     );
   }
-  Future doLogin() async{
-  final email = txtEmail.text;
-  final password = txtPassword.text;
-  const deviceId = "12345";
-  final response = await HttpHelper().login(email, password, deviceId);
-  print(response.body);
-
-  SharedPreferences pref = await SharedPreferences.getInstance();
-        const key = 'token';
-        final value = pref.get(key);
-        final token = value;
-  print(token);
-
-      final tokenTest = null;
-    if (token == null) {
-    Navigator.push(
-                  context,
-                MaterialPageRoute(builder: (context) => Login()),
-              );
-    }else{
-    Navigator.push(
-                  context,
-                MaterialPageRoute(builder: (context) => LandingHome()),
-              );
- }
-}
 }
 
 

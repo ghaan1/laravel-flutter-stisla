@@ -7,14 +7,12 @@ import 'kategori/mainKategori.dart';
 
 class LandingHome extends StatefulWidget {
   const LandingHome({super.key});
-
   @override
   State<LandingHome> createState() => _LandingHomeState();
 }
 
 class _LandingHomeState extends State<LandingHome> {
   int currentPageIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +25,6 @@ class _LandingHomeState extends State<LandingHome> {
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            
             icon: Icon(Icons.home),
             label: 'Beranda',
           ),
@@ -42,15 +39,9 @@ class _LandingHomeState extends State<LandingHome> {
         ],
       ),
       body: <Widget>[
-        Container(
-          child: const MainHome(),
-        ),
-        Container(
-          child: const MainKategori(),
-        ),
-        Container(
-           child: const MainProfil(),
-        ),
+        const MainHome(),
+        const MainKategori(),
+        const MainProfil(),
       ][currentPageIndex],
     );
    

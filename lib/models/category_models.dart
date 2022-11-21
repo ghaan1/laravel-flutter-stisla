@@ -1,18 +1,16 @@
-import 'dart:convert';
 class Category {
   int id;
   String name;
-  
-
   
   Category({
     required this.id,
     required this.name,
   });
+
 Category.fromJson( Map json) :
       id = json['id'],
       name = json['name'];
-
+}
   // factory Category.fromJson(Map<String, dynamic> json) {
   //   return Category(
   //     id: json['id'],
@@ -22,25 +20,25 @@ Category.fromJson( Map json) :
 
   
 
-    Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
+  //   Map<String, dynamic> toMap() {
+  //   final result = <String, dynamic>{};
 
-    result.addAll({'id': id});
-    result.addAll({'name': name});
+  //   result.addAll({'id': id});
+  //   result.addAll({'name': name});
 
-    return result;
-  }
+  //   return result;
+  // }
 
-   factory Category.fromMap(Map<String, dynamic> map) {
-    return Category(
-      id: map['id']?.toInt() ?? 0,
-      name: map['name'] ?? ''
-    );
-  }
-   String toJson() => json.encode(toMap());
+  //  factory Category.fromMap(Map<String, dynamic> map) {
+  //   return Category(
+  //     id: map['id']?.toInt() ?? 0,
+  //     name: map['name'] ?? ''
+  //   );
+  // }
+  //  String toJson() => json.encode(toMap());
 
   // @override
-  String toString() => 'Category(id: $id, name: $name)';
+  // String toString() => 'Category(id: $id, name: $name)';
 
   // @override
   // bool operator ==(Object other) {
@@ -48,5 +46,5 @@ Category.fromJson( Map json) :
 
   //   return other is Category && other.id == id && other.name == name;
   // }
-}
+
 
