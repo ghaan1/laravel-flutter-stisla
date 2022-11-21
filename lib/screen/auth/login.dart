@@ -1,10 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stislaflutter/screen/homePage/LandingHome.dart';
 import 'package:stislaflutter/screen/homePage/home/mainHome.dart';
-import '../api/http_helper.dart';
+import '../../api/http_helper.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -154,27 +153,6 @@ class _Login extends State<Login> {
                 MaterialPageRoute(builder: (context) => LandingHome()),
               );
  }
-  //     Duration(seconds: 3),
-  //     () async {
-  //       SharedPreferences pref = await SharedPreferences.getInstance();
-  //       const key = 'token';
-  //       final value = pref.get(key);
-  //       final token = '$value';
-  //       if (token == null) {
-         
-        
-  //         Navigator.push(
-  //            context,
-  //            MaterialPageRoute(builder: (context) => Login()),
-  //         );
-  //       }
-  //        Navigator.push(
-  //            context,
-  //            MaterialPageRoute(builder: (context) => LandingHome()),
-  //         );
-  //     },
-  //   );
-  //Navigator.pushNamed(context, "/main");
 }
 }
 

@@ -30,41 +30,79 @@ String token = '0';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          color: Color(0xFF6777EE),
-        ),
-        width: double.infinity,
-        child: Column(
+      body: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: const [
+                   CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 50.0,
+                    backgroundImage: AssetImage('assets/images/stisla-fill.jpg'),
+                  ),
+                   Padding(padding: EdgeInsets.only(top: 10.0)),
+                   Text(
+                    "~STISLA FLUTTER~",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 24.0,
+                        fontFamily: 'Nunito',
+                        color: Color(0xFF6777EE)),
+                  ),
+                  ],
+                  ),
+                  ),
+          ),
           
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(token),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: const Color(0xFFc2c9f8),
-                elevation: 10,
-                shape: RoundedRectangleBorder( //to set border radius to button
-                borderRadius: BorderRadius.circular(15)
-            ),
-              ),
-              onPressed: (){
-                Navigator.pushNamed(context, "/login");
-            }, child: Text('Login')),
-             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF343c77),
-                elevation: 10,
-                shape: RoundedRectangleBorder( //to set border radius to button
-                borderRadius: BorderRadius.circular(15)
-            ),
-              ),onPressed: (){
-Navigator.pushNamed(context, "/register");
-            }, child: Text('Register'))
-          ],
-          
-        ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        SizedBox(
+            height: 30,
+          ),
+
+                        // Text(token),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFFc2c9f8),
+                            elevation: 10,
+                            shape: RoundedRectangleBorder( //to set border radius to button
+                            borderRadius: BorderRadius.circular(20)
+                        ),
+                          ),
+                          onPressed: (){
+                            Navigator.pushNamed(context, "/login");
+                        }, child: Text('Login',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),)),
+                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFF343c77),
+                            elevation: 10,
+                            shape: RoundedRectangleBorder( //to set border radius to button
+                            borderRadius: BorderRadius.circular(15)
+                        ),
+                          ),onPressed: (){
+                                Navigator.pushNamed(context, "/register");
+                        }, child: Text('Register',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),)),
+                      ],
+                    ),
+                  ),
+                )
+        ],
       )
     );
   }
