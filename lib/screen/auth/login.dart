@@ -16,7 +16,7 @@ class _Login extends State<Login> {
   //final txtPassword = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final txtEmail = TextEditingController(text: 'superadmin@gmail.com');
-  final txtPassword = TextEditingController(text: 'passwor');
+  final txtPassword = TextEditingController(text: 'password');
   var Token = '';
   bool _autoValidate = false;
 
@@ -28,7 +28,7 @@ class _Login extends State<Login> {
     final password = txtPassword.text;
     const deviceId = "12345";
     final response = await HttpHelper().login(email, password, deviceId);
-    //print(response.body);
+    print(response.body);
 
     SharedPreferences pref = await SharedPreferences.getInstance();
     const key = 'token';
@@ -125,7 +125,7 @@ class _Login extends State<Login> {
                 ),
                 TextFormField(
                   validator: MultiValidator([
-                    RequiredValidator(errorText: "Masih Kosong"),
+                    RequiredValidator(errorText: ""),
                     PatternValidator(_emailPattern,
                         errorText:
                             "Password must have atleast one special character"),

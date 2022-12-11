@@ -1,9 +1,10 @@
-import 'package:stislaflutter/screen/homePage/LandingHome.dart';
-import 'package:stislaflutter/screen/homePage/home/mainHome.dart';
-import 'package:stislaflutter/screen/homePage/kategori/mainKategori.dart';
-import 'package:stislaflutter/screen/homePage/profil/mainProfil.dart';
 import 'package:stislaflutter/screen/auth/login.dart';
 import 'package:stislaflutter/screen/auth/register.dart';
+import 'package:stislaflutter/screen/homePage/LandingHome.dart';
+import 'package:stislaflutter/screen/homePage/home/mainHome.dart';
+import 'package:stislaflutter/screen/homePage/kategori/CRUD/tambah_kategori.dart';
+import 'package:stislaflutter/screen/homePage/kategori/mainKategori.dart';
+import 'package:stislaflutter/screen/homePage/profil/mainProfil.dart';
 import 'package:stislaflutter/screen/splash/screen.dart';
 
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           "/mainhome":(context) => const MainHome(),
           "/mainprofil":(context) => const MainProfil(),
           "/mainkategori":(context) => const MainKategori(),
+          "/tambahKategori":(context) => const TambahKategori(),
 
       },
       title: 'Flutter Demo',

@@ -8,7 +8,7 @@ import 'package:stislaflutter/models/category_models.dart';
 
 
 class HttpHelper{
-  final String _baseUrl = 'http://192.168.1.80:8000/api/';
+  final String _baseUrl = 'http://192.168.1.8:8000/api/';
   final String token ='';
 
 
@@ -62,19 +62,6 @@ Future<Response> logout(String token) async {
   
   return response;
 }
-
-getKategori() async {
-  final url = Uri.parse(_baseUrl + 'category');
-  final prefs = await SharedPreferences.getInstance();
-      const key = 'token';
-      final token = prefs.get(key);
-    final headers = {
-      'Authorization': 'Bearer ' + '$token',
-      'Accept': 'application/json',
-    };
-      final response = await get(url, headers: headers);
-      return response;
-  }
 
 
 
