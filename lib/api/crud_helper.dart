@@ -47,6 +47,10 @@ final prefs = await SharedPreferences.getInstance();
   }
 Future<Response> addCategory(String name) async {
   final url = Uri.parse(_baseUrl + 'category');
+  SharedPreferences pref = await SharedPreferences.getInstance();
+    const key = 'token';
+    final value = pref.get(key);
+    final token = value;
   final body = {
     'name' : name,
   };
