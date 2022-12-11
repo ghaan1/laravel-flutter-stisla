@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stislaflutter/screen/homePage/home/widget/widget_banner.dart';
+import 'package:stislaflutter/screen/homePage/home/widget/widget_title.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({super.key});
@@ -33,56 +35,15 @@ class _MainHomeState extends State<MainHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('HOME',
-          style: TextStyle(
-            fontFamily: 'Nunito',
-            fontWeight: FontWeight.bold,
-          ),
-          ),
-        ),
-        backgroundColor: const Color(0xFF6777EE),
-        automaticallyImplyLeading: false,
-      ),
       body: <Widget>[
-        Column(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xFF6777EE)
-                ),
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Text('WELCOME',
-                      style : TextStyle(
-                        letterSpacing: 5,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Nunito',
-                        fontSize: 25,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: 
-              Text(name,
-                style : const TextStyle(
-                  letterSpacing: 2,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Nunito',
-                  fontSize: 20,
-                ),
-              ),
-            )
-          ],
+        SingleChildScrollView(
+          child: Column(
+            children: [
+               WidgetBanner(),
+            WidgetTitle(),
+           
+            ],
+          ),
         ),
       ][currentPageIndex],
     );
