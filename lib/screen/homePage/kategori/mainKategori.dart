@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:stislaflutter/api/crud_helper.dart';
 import 'package:stislaflutter/models/category_models.dart';
+import 'package:stislaflutter/screen/homePage/kategori/CRUD/edit_kategori.dart';
 import 'package:stislaflutter/screen/homePage/kategori/CRUD/tambah_kategori.dart';
 
 class MainKategori extends StatefulWidget {
-  const MainKategori({super.key});
+  const MainKategori({super.key,
+  });
+  
   @override
   State<MainKategori> createState() => _MainKategoriState();
 }
@@ -21,6 +24,8 @@ class _MainKategoriState extends State<MainKategori> {
   bool isLoading = true;
   final ScrollController scrollController = ScrollController();
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+  
+  
   // getKategori() async {
   //   final response = await CrudHelper().getKategori();
   //   var dataResponse = jsonDecode(response.body);
@@ -144,6 +149,17 @@ class _MainKategoriState extends State<MainKategori> {
                     ),
                   ),
                 ),
+                onDismissed: (DismissDirection direction) {
+                  if (direction == DismissDirection.startToEnd) {
+                     showDialog(
+              context: context,
+              builder: (context) {
+                return  EditKategori(category: categories[index]);
+              });
+                  } else {
+                 
+                  }         
+                },
                 child: Container(
                   height: 150,
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),

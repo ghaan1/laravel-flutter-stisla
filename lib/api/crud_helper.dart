@@ -6,21 +6,19 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stislaflutter/models/category_models.dart';
 
+class CrudHelper {
+  final String _baseUrl = 'http://192.168.1.127:8000/api/';
+  final String token = '';
 
-class CrudHelper{
-  final String _baseUrl = 'http://192.168.1.8:8000/api/';
-  final String token ='';
-
-
-static Future<List<dynamic>> getCategories(String page) async {
-   final String _baseUrl = 'http://192.168.1.8:8000/api/';
-    var url = Uri.parse(_baseUrl+'category?page=$page');
+  static Future<List<dynamic>> getCategories(String page) async {
+    final String _baseUrl = 'http://192.168.1.127:8000/api/';
+    var url = Uri.parse(_baseUrl + 'category?page=$page');
 
     List<Category> categories = [];
     List<dynamic> categoryServices = [];
-final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     const key = 'token';
-      final token = prefs.get(key);
+    final token = prefs.get(key);
     final headers = {
       'Authorization': 'Bearer ' + '$token',
       'Accept': 'application/json',
@@ -45,23 +43,40 @@ final prefs = await SharedPreferences.getInstance();
 
     return categoryServices;
   }
-Future<Response> addCategory(String name) async {
-  final url = Uri.parse(_baseUrl + 'category');
-  SharedPreferences pref = await SharedPreferences.getInstance();
+
+  Future<Response> addCategory(String name) async {
+    final url = Uri.parse(_baseUrl + 'category');
+    SharedPreferences pref = await SharedPreferences.getInstance();
     const key = 'token';
     final value = pref.get(key);
     final token = value;
-  final body = {
-    'name' : name,
-  };
-  final headers = {
-    'Accept': 'application/json',
-    'Authorization': 'Bearer ' + '$token',
-  };
+    final body = {
+      'name': name,
+    };
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + '$token',
+    };
 
-  final response = await post(url, body: body, headers: headers);
-  return response;
-}
+    final response = await post(url, body: body, headers: headers);
+    return response;
+  }
 
+  Future<Response> editCategori(Category category, String name) async {
+    final url = Uri.parse(_baseUrl + 'category/${category.id}');
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    const key = 'token';
+    final value = pref.get(key);
+    final token = value;
+    final body = {
+      'name': name,
+    };
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + '$token',
+    };
 
+    final response = await put(url, body: body, headers: headers);
+    return response;
+  }
 }
