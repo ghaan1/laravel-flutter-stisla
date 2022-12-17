@@ -8,7 +8,7 @@ import 'package:stislaflutter/models/category_models.dart';
 
 
 class HttpHelper{
-  final String _baseUrl = 'http://192.168.1.127:8000/api/';
+  final String _baseUrl = 'http://192.168.1.5:8000/api/';
   final String token ='';
 
 

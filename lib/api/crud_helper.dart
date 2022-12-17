@@ -7,11 +7,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stislaflutter/models/category_models.dart';
 
 class CrudHelper {
-  final String _baseUrl = 'http://192.168.1.127:8000/api/';
+  final String _baseUrl = 'http://192.168.1.5:8000/api/';
   final String token = '';
 
   static Future<List<dynamic>> getCategories(String page) async {
-    final String _baseUrl = 'http://192.168.1.127:8000/api/';
+    final String _baseUrl = 'http://192.168.1.5:8000/api/';
     var url = Uri.parse(_baseUrl + 'category?page=$page');
 
     List<Category> categories = [];
