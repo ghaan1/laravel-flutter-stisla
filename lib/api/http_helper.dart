@@ -32,13 +32,13 @@ Future<Response> login(String email, String password, String deviceId) async {
   return response;
 }
 
-Future<Response> register(String name, String email, String password, String deviceId) async {
+Future<Response> register(String name, String email, String password, String password_confirmation, String deviceId) async {
   final url = Uri.parse(_baseUrl + 'auth/register');
   final body = {
     'name' : name,
     'email' : email,
     'password' : password,
-    'password_confirmation' : password,
+    'password_confirmation' : password_confirmation,
     'device_name' : deviceId,
   };
   final headers = {
