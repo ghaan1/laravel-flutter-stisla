@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stislaflutter/screen/homePage/profil/widget/widget_banner_profil.dart';
 import '../../../api/http_helper.dart';
 
 class MainProfil extends StatefulWidget {
@@ -16,20 +17,20 @@ class _MainProfilState extends State<MainProfil> {
 
   getPref() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-      setState(() {
-         const key = 'token';
-         const key1 = 'name';
-         const key2 = 'email';
-         final value = pref.get(key);
-         final value1 = pref.get(key1);
-         final value2 = pref.get(key2);
-         token = '$value';
-         name = '$value1';
-         email = '$value2';
-         txtName.text=name;
-         txtToken.text=token;
-         txtEmail.text=email;
-      });
+    setState(() {
+      const key = 'token';
+      const key1 = 'name';
+      const key2 = 'email';
+      final value = pref.get(key);
+      final value1 = pref.get(key1);
+      final value2 = pref.get(key2);
+      token = '$value';
+      name = '$value1';
+      email = '$value2';
+      txtName.text = name;
+      txtToken.text = token;
+      txtEmail.text = email;
+    });
   }
 
   @override
@@ -40,9 +41,9 @@ class _MainProfilState extends State<MainProfil> {
 
   logOut() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(()  {
+    setState(() {
       preferences.remove("token");
-      preferences.clear();   
+      preferences.clear();
     });
     final token = txtToken.text;
     final response = await HttpHelper().logout(token);
@@ -57,160 +58,144 @@ class _MainProfilState extends State<MainProfil> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Center(
-          child: Text('PROFIL',
-          style: TextStyle(
-            fontFamily: 'Nunito',
-            fontWeight: FontWeight.bold,
-          ),
-          ),
-        ),
-        backgroundColor: const Color(0xFF6777EE),
-        automaticallyImplyLeading: false,
-      ),
       body: <Widget>[
-        Container(
-          margin: const EdgeInsets.all(20),
-          width: double.infinity,
-          child: Column(
-            children: [
-              Expanded(
+        Column(
+          children: [
+            const WidgetBannerProfil(),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(20),
+                width: double.infinity,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    CircleAvatar(
-                      backgroundColor: Colors.black,
-                      radius: 50,
-                      child: Icon(Icons.face_rounded,
-                      size: 100,)
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    TextFormField(
-                      readOnly: true,
-                      controller: txtName,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10,horizontal: 17),
-                        filled: true,
-                        fillColor: Colors.white,
-                        labelText: 'Name',
-                        labelStyle: const TextStyle(
-                          color: Color(0xFF6777EE),
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Nunito'
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            width: 3, 
-                            color: Color(0xFF6777EE)
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              width: 3, 
-                              color: Color(0xFF6777EE)),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          CircleAvatar(
+                              backgroundColor: Colors.black,
+                              radius: 50,
+                              child: Icon(
+                                Icons.face_rounded,
+                                size: 100,
+                              )),
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),     
-                    TextFormField(
-                      readOnly: true,
-                      controller: txtEmail,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10,horizontal: 17),
-                        filled: true,
-                        fillColor: Colors.white,
-                        labelText: 'Email',
-                        labelStyle: const TextStyle(
-                          color: Color(0xFF6777EE),
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Nunito'
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            width: 3, 
-                            color: Color(0xFF6777EE)
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          TextFormField(
+                            readOnly: true,
+                            controller: txtName,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 17),
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Name',
+                              labelStyle: const TextStyle(
+                                  color: Color(0xFF6777EE),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Nunito'),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 3, color: Color(0xFF6777EE)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 3, color: Color(0xFF6777EE)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            width: 3, 
-                            color: Color(0xFF6777EE)),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),     
-                    const SizedBox(
-                      height: 20,
-                    ), 
-                    TextFormField( 
-                      readOnly: true,
-                      controller: txtToken,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10,horizontal: 17),
-                        filled: true,
-                        fillColor: Colors.white,
-                        labelText: 'Token',
-                        labelStyle: const TextStyle(
-                          color: Color(0xFF6777EE),
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Nunito'
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            width: 3, 
-                            color: Color(0xFF6777EE)
+                          const SizedBox(
+                            height: 20,
                           ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            width: 3, 
-                            color: Color(0xFF6777EE)),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                          TextFormField(
+                            readOnly: true,
+                            controller: txtEmail,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 17),
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Email',
+                              labelStyle: const TextStyle(
+                                  color: Color(0xFF6777EE),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Nunito'),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 3, color: Color(0xFF6777EE)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 3, color: Color(0xFF6777EE)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            readOnly: true,
+                            controller: txtToken,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 17),
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Token',
+                              labelStyle: const TextStyle(
+                                  color: Color(0xFF6777EE),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Nunito'),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 3, color: Color(0xFF6777EE)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    width: 3, color: Color(0xFF6777EE)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF6777EE),
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(13)),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, "/");
+                                logOut();
+                              },
+                              child: const Text(
+                                'LOGOUT',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                        ],
                       ),
-                    ),    
-                    const SizedBox(
-                      height: 36,
-                    ),  
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6777EE),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(13)
-                        ),
-                      ),
-                      onPressed: (){
-                        Navigator.pushNamed(context, "/");
-                        logOut();
-                      },
-                      child: const Text('LOGOUT',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold
-                        ),
-                      )
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ][currentPageIndex],
     );
   }
 }
-
