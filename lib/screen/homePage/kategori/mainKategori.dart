@@ -5,9 +5,8 @@ import 'package:stislaflutter/models/category_models.dart';
 import 'package:stislaflutter/screen/homePage/kategori/CRUD/edit_kategori.dart';
 import 'package:stislaflutter/screen/homePage/kategori/CRUD/delete_kategori.dart';
 import 'package:stislaflutter/screen/homePage/kategori/CRUD/tambah_kategori.dart';
+import 'package:stislaflutter/screen/homePage/kategori/widget/dialog.dart';
 import 'package:stislaflutter/screen/homePage/kategori/widget/widget_banner_kategori.dart';
-
-import '../home/widget/widget_banner.dart';
 
 class MainKategori extends StatefulWidget {
   const MainKategori({
@@ -82,7 +81,6 @@ class _MainKategoriState extends State<MainKategori> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF6777EE),
         onPressed: () {
@@ -101,85 +99,86 @@ class _MainKategoriState extends State<MainKategori> {
       body: <Widget>[
         Column(
           children: [
-            Expanded(flex: 1, child: WidgetBannerKategori()),
+            const WidgetBannerKategori(),
             Expanded(
               flex: 2,
               child: ListView.builder(
                   controller: scrollController,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.all(10
-                  ),
+                  padding: const EdgeInsets.all(10),
                   itemCount: categories.length,
                   itemBuilder: (context, index) {
-                    return Dismissible(
-                      key: UniqueKey(),
-                      background: Container(
-                        color: Colors.yellow,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            children: const <Widget>[
-                              Icon(Icons.create_rounded, color: Colors.white),
-                              Text('Edit',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ),
-                      ),
-                      secondaryBackground: Container(
-                        color: Colors.red,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const <Widget>[
-                              Icon(Icons.delete, color: Colors.white),
-                              Text('Hapus',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ),
-                      ),
-                      onDismissed: (DismissDirection direction) {
-                        if (direction == DismissDirection.startToEnd) {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return EditKategori(
-                                    category: categories[index]);
-                              });
-                        } else {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return DeleteCategori(
-                                    category: categories[index]);
-                              });
-                        }
-                      },
-                      child: Container(
-                        height: 150,
-                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    return Container(
+                        width: double.infinity,
+                        height: 54,
+                        margin: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
                             border: Border.all(
-                          color: const Color(0xFF6777EE),
-                          width: 1,
-                        )),
-                        child: ListTile(
-                          title: Text(
-                            categories[index].name,
-                            style: const TextStyle(
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
+                              color: const Color(0xFF6777EE),
+                              width: 1,
+                            )
+                            // color: Colors.white,
+                            ),
+                        child: TextButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(15)))),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 7,
+                                child: Text(
+                                  categories[index].name,
+                                  style: const TextStyle(
+                                    color: Color(0xFF6777EE),
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                              Expanded(
+                                  child: IconButton(
+                                      color: Colors.black,
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return EditKategori(
+                                                  category:
+                                                      categories[index]);
+                                            });
+                                      },
+                                      icon: Icon(Icons.create_rounded))),
+                              Expanded(
+                                  child: IconButton(
+                                      color: Colors.red,
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return DeleteCategori(
+                                                  category:
+                                                      categories[index]);
+                                            });
+                                      },
+                                      icon: Icon(Icons.delete)))
+                            ],
                           ),
-                        ),
-                      ),
-                    );
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return DialogKategori(
+                                    category: categories[index],
+                                  );
+                                });
+                          },
+                        ));
                   }),
             ),
           ],
@@ -188,5 +187,4 @@ class _MainKategoriState extends State<MainKategori> {
     );
   }
 }
-
 int currentPageIndex = 0;

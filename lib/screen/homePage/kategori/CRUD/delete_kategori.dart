@@ -3,91 +3,119 @@ import 'package:flutter/material.dart';
 import 'package:stislaflutter/api/crud_helper.dart';
 import 'package:stislaflutter/models/category_models.dart';
 
-
 // ignore: must_be_immutable
 class DeleteCategori extends StatefulWidget {
-    Category category;
+  Category category;
   DeleteCategori({
     Key? key,
     required this.category,
   }) : super(key: key);
-
 
   @override
   State<DeleteCategori> createState() => _DeleteCategoriState();
 }
 
 class _DeleteCategoriState extends State<DeleteCategori> {
-    final TextEditingController txtEditCategory = TextEditingController();
+  final TextEditingController txtEditCategory = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     txtEditCategory.text = widget.category!.name;
   }
+
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          16,
-        ),
-      ),
-      title: const Text('Delete Category'),
-      content: SizedBox(
+    return Dialog(
+      elevation: 1,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 1.4,
+        height: MediaQuery.of(context).size.height / 4.667,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15.0),
+            boxShadow: [
+              BoxShadow(
+                  offset: const Offset(12, 26),
+                  blurRadius: 50,
+                  spreadRadius: 0,
+                  color: Colors.white),
+            ]),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
-              controller: txtEditCategory,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 2, color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text("Delete",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold)),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                              //to set border radius to button
+                              borderRadius: BorderRadius.circular(15)),
+                        ),
+                        onPressed: () {
+                          doDeleteCategory();
+                        },
+                        child: const Text("Ya",
+                            style: TextStyle(
+                                fontFamily: 'Nunito',
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold))),
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 2, color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
+                Expanded(
+                  child: SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                              //to set border radius to button
+                              borderRadius: BorderRadius.circular(15)),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                        child: const Text("Tidak",
+                            style: TextStyle(
+                                fontFamily: 'Nunito',
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold))),
+                  ),
                 ),
-                hintText: 'Task',
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
+              ],
             ),
           ],
         ),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              primary: const Color(0xff2da9ef),
-            ),
-            onPressed: () {
-            doDeleteCategory();
-            },
-            child: const Text(
-              'Delete',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
-   doDeleteCategory() async {
-                      final response =
-                          await CrudHelper().deleteCategori(widget.category!);
-                      print(response.body);
-                      Navigator.pushNamed(context, "/main");
-                    }
+  doDeleteCategory() async {
+    final response = await CrudHelper().deleteCategori(widget.category!);
+    print(response.body);
+    Navigator.pushNamed(context, "/main");
+  }
 }

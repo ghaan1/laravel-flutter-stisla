@@ -5,87 +5,113 @@ import 'package:stislaflutter/models/category_models.dart';
 
 // ignore: must_be_immutable
 class EditKategori extends StatefulWidget {
-    Category category;
+  Category category;
   EditKategori({
     Key? key,
     required this.category,
   }) : super(key: key);
-
 
   @override
   State<EditKategori> createState() => _EditKategoriState();
 }
 
 class _EditKategoriState extends State<EditKategori> {
-    final TextEditingController txtEditCategory = TextEditingController();
+  final TextEditingController txtEditCategory = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     txtEditCategory.text = widget.category!.name;
   }
+
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          16,
-        ),
-      ),
-      title: const Text('Edit Category'),
-      content: SizedBox(
+    return Dialog(
+      elevation: 1,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 1.4,
+        height: MediaQuery.of(context).size.height / 4.667,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15.0),
+            boxShadow: [
+              BoxShadow(
+                  offset: const Offset(12, 26),
+                  blurRadius: 50,
+                  spreadRadius: 0,
+                  color: Colors.grey.withOpacity(.1)),
+            ]),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
-              controller: txtEditCategory,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 2, color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 2, color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                hintText: 'Task',
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
+            const SizedBox(
+              height: 10,
+            ),
+            const Text("Edit",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold)),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: 250,
+              child: TextFormField(
+                controller: txtEditCategory,
+                decoration: InputDecoration(
+                  // errorText: validateEmail(txtEmail.text),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 17),
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelText: 'Kategori',
+                  labelStyle: const TextStyle(
+                      color: Color(0xFF6777EE),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Nunito'),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(width: 3, color: Color(0xFF6777EE)),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(width: 3, color: Color(0xFF6777EE)),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 45,
+              width: double.infinity,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF6777EE),
+                    elevation: 10,
+                  ),
+                  onPressed: () {
+                    doEditCategory();
+                  },
+                  child: const Text("Edit",
+                      style: TextStyle(
+                          fontFamily: 'Nunito', fontWeight: FontWeight.bold))),
             ),
           ],
         ),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              primary: const Color(0xff2da9ef),
-            ),
-            onPressed: () {
-            doEditCategory();
-            },
-            child: const Text(
-              'Add',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
-   doEditCategory() async{
+
+  doEditCategory() async {
     final name = txtEditCategory.text;
     final response = await CrudHelper().editCategori(widget.category!, name);
     print(response.body);
-    Navigator.pushNamed(context, "/main" );
+    Navigator.pushNamed(context, "/main");
   }
 }
