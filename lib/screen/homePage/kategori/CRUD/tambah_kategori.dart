@@ -97,6 +97,6 @@ class _TambahKategoriState extends State<TambahKategori> {
     final name = txtAddCategory.text;
     final response = await CrudHelper().addCategory(name);
     print(response.body);
-    Navigator.pushNamed(context, "/main" );
+     Navigator.of(context).pop(false);
   }
 }

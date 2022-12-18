@@ -116,6 +116,6 @@ class _DeleteCategoriState extends State<DeleteCategori> {
   doDeleteCategory() async {
     final response = await CrudHelper().deleteCategori(widget.category!);
     print(response.body);
-    Navigator.pushNamed(context, "/main");
+     Navigator.of(context).pop(false);
   }
 }

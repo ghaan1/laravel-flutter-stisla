@@ -112,6 +112,6 @@ class _EditKategoriState extends State<EditKategori> {
     final name = txtEditCategory.text;
     final response = await CrudHelper().editCategori(widget.category!, name);
     print(response.body);
-    Navigator.pushNamed(context, "/main");
+     Navigator.of(context).pop(false);
   }
 }

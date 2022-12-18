@@ -4,22 +4,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
-   @override
+  @override
   State<LandingPage> createState() => _LandingPage();
 }
 
 class _LandingPage extends State<LandingPage> {
-String token = '0';
+  String token = '0';
   getPref() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-      setState(() {
-         const key = 'token';
-         final value = pref.get(key);
-         token = '$value';
-      });
+    setState(() {
+      const key = 'token';
+      final value = pref.get(key);
+      token = '$value';
+    });
   }
- 
- @override
+
+  @override
   void initState() {
     getPref();
     super.initState();
@@ -28,8 +28,10 @@ String token = '0';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
+        body: Container(
+          margin: EdgeInsets.all(40),
+          child: Column(
+      children: [
           Expanded(
             flex: 1,
             child: SizedBox(
@@ -37,78 +39,77 @@ String token = '0';
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
-                   CircleAvatar(
+                  CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 50.0,
                     backgroundImage: AssetImage('assets/images/stisla-fill.jpg'),
                   ),
-                   Padding(padding: EdgeInsets.only(top: 10.0)),
-                   Text(
+                  Padding(padding: EdgeInsets.only(top: 10.0)),
+                  Text(
                     "~STISLA FLUTTER~",
                     style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 24.0,
-                      fontFamily: 'Nunito',
-                      color: Color(0xFF6777EE)),
-                    ),
-                  ],
+                        fontWeight: FontWeight.w900,
+                        fontSize: 24.0,
+                        fontFamily: 'Nunito',
+                        color: Color(0xFF6777EE)),
+                  ),
+                ],
               ),
             ),
           ),
           Expanded(
             flex: 1,
-            child: SizedBox(
-              width: double.infinity,
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    // Text(token),
-                    ElevatedButton(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                // Text(token),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFc2c9f8),
+                        backgroundColor: Color.fromARGB(255, 126, 142, 248),
                         elevation: 10,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)
-                        ),
+                            borderRadius: BorderRadius.circular(20)),
                       ),
-                      onPressed: (){
+                      onPressed: () {
                         Navigator.pushNamed(context, "/login");
-                      }, 
-                      child: const Text('Login',
+                      },
+                      child: const Text(
+                        'Login',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
                         ),
-                      )
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color(0xFF343c77),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder( //to set border radius to button
-                          borderRadius: BorderRadius.circular(15)
-                        ),
-                      ),
-                      onPressed: (){
-                        Navigator.pushNamed(context, "/register");
-                      }, 
-                      child: const Text('Register',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      )
-                    ),
-                  ],
+                      )),
                 ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF343c77),
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/register");
+                      },
+                      child: const Text(
+                        'Register',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      )),
+                ),
+              ],
             ),
           )
-        ],
-      )
-    );
+      ],
+    ),
+        ));
   }
 }
-
-
